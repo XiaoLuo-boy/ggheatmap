@@ -1,6 +1,38 @@
 #' @name ggheatmap
 #' @title ggplot2 version of heatmap
 #' @author Baiwei Luo
+#' @param data input data(matrix or data.frame)
+#' @param color the color of heatmap
+#' @param legendName character,the title of heatmap legend
+#' @param scale character,the way of scale data("none", "row" or "column")
+#' @param cluster_rows whether rows should be clustered(TRUE of FALSE)
+#' @param cluster_cols whether column should be clustered(TRUE of FALSE)
+#' @param dist_method character,the method parameter of dist function
+#' @param hclust_method character,the method parameter of hclust function
+#' @param text_angle_rows numeric,the angle of y-axis label
+#' @param text_angle_cols numeric,the angle of x-axis label
+#' @param text_color_rows character,the color of y-axis label
+#' @param text_color_cols character,the color of x-axis label
+#' @param text_face_rows character,the face of y-axis label
+#' @param text_face_cols character,the face of x-axis label
+#' @param text_just_rows a vector(hjust,vjust) for the hjust/vjust of y-axis label
+#' @param text_just_cols a vector(hjust,vjust) for the hjust/vjust of x-axis label
+#' @param text_show_rows a character you want to show for y-axis
+#' @param text_show_cols a character you want to show for x-axis
+#' @param annotation_cols a data.frame for column annotation
+#' @param annotation_rows a data.frame for row annotation
+#' @param annotation_color a list for annotation color
+#' @param annotation_width  a numeric for annotation width
+#' @param show_cluster_cols whether show column cluster tree(TRUE of FALSE)
+#' @param show_cluster_rows whether show row cluster tree(TRUE of FALSE)
+#' @param cluster_num a numeric for cut cluster tree
+#' @param tree_height_rows row cluster tree height
+#' @param tree_height_cols column cluster tree height
+#' @param tree_color_rows a character for row cluster tree color
+#' @param tree_color_cols a character for column cluster tree color
+#' @param levels_rows a character for  y-axis label levels
+#' @param levels_cols a character for  x-axis label levels
+#' @return p
 #' @import ggplot2
 #' @import ggpubr
 #' @import aplot

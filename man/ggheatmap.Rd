@@ -3,6 +3,72 @@
 \name{ggheatmap}
 \alias{ggheatmap}
 \title{ggplot2 version of heatmap}
+\arguments{
+\item{data}{input data(matrix or data.frame)}
+
+\item{color}{the color of heatmap}
+
+\item{legendName}{character,the title of heatmap legend}
+
+\item{scale}{character,the way of scale data("none", "row" or "column")}
+
+\item{cluster_rows}{whether rows should be clustered(TRUE of FALSE)}
+
+\item{cluster_cols}{whether column should be clustered(TRUE of FALSE)}
+
+\item{dist_method}{character,the method parameter of dist function}
+
+\item{hclust_method}{character,the method parameter of hclust function}
+
+\item{text_angle_rows}{numeric,the angle of y-axis label}
+
+\item{text_angle_cols}{numeric,the angle of x-axis label}
+
+\item{text_color_rows}{character,the color of y-axis label}
+
+\item{text_color_cols}{character,the color of x-axis label}
+
+\item{text_face_rows}{character,the face of y-axis label}
+
+\item{text_face_cols}{character,the face of x-axis label}
+
+\item{text_just_rows}{a vector(hjust,vjust) for the hjust/vjust of y-axis label}
+
+\item{text_just_cols}{a vector(hjust,vjust) for the hjust/vjust of x-axis label}
+
+\item{text_show_rows}{a character you want to show for y-axis}
+
+\item{text_show_cols}{a character you want to show for x-axis}
+
+\item{annotation_cols}{a data.frame for column annotation}
+
+\item{annotation_rows}{a data.frame for row annotation}
+
+\item{annotation_color}{a list for annotation color}
+
+\item{annotation_width}{a numeric for annotation width}
+
+\item{show_cluster_cols}{whether show column cluster tree(TRUE of FALSE)}
+
+\item{show_cluster_rows}{whether show row cluster tree(TRUE of FALSE)}
+
+\item{cluster_num}{a numeric for cut cluster tree}
+
+\item{tree_height_rows}{row cluster tree height}
+
+\item{tree_height_cols}{column cluster tree height}
+
+\item{tree_color_rows}{a character for row cluster tree color}
+
+\item{tree_color_cols}{a character for column cluster tree color}
+
+\item{levels_rows}{a character for  y-axis label levels}
+
+\item{levels_cols}{a character for  x-axis label levels}
+}
+\value{
+p
+}
 \description{
 ggplot2 version of heatmap
 }
