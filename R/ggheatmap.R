@@ -175,13 +175,13 @@ ggheatmap <- function(data,
                                     axis.text.x = element_text(face = text_face_cols,       #坐标标签微调
                                                                angle = text_angle_cols,
                                                                color = text_color_cols,
-                                                               hjust = text_just_rows[1],
-                                                               vjust = text_just_rows[2]),
+                                                               hjust = text_just_cols[1],
+                                                               vjust = text_just_cols[2]),
                                     axis.text.y = element_text(face = text_face_rows,
                                                                angle = text_angle_rows,
                                                                color = text_color_rows,
                                                                hjust = text_just_rows[1],
-                                                               vjust = text_just_cols[2]))+
+                                                               vjust = text_just_rows[2]))+
                               labs(fill=legendName)
 
   #step5.draw your annotation
