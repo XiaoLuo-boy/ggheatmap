@@ -1,0 +1,28 @@
+Package: ggheatmap
+Title: ggplot2 version of heatmap
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "Baiwei",
+           family = "Luo",
+           role = c("aut", "cre"),
+           email = "2734782653@qq.com",
+           comment = c(ORCID = "YOUR-ORCID-ID"))
+Description: This R package can basically meet the main functions of pheatmap, while being more flexible in visualization.
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1
+Depends: 
+    ggpubr,
+    ggplot2,
+    tibble,
+    factoextra,
+    tidyr,
+    grDevices,
+    stats
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
+Imports: 
+    aplot
