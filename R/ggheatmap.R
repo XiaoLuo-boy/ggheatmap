@@ -86,12 +86,13 @@ ggheatmap <- function(data,
                          scale_df <- data
                        }
   #step2. draw cluster tree
+                        dat <- as.data.frame(scale_df)%>%
+                           rownames_to_column(var = "gene")%>%
+                           tidyr::gather(key = "cluster",value = "expression",-gene)
                          if(cluster_rows){
                            row_clust <- hclust(dist(scale_df %>% as.matrix(),method = dist_method),method = hclust_method)
                            roworder <- row_clust$labels[row_clust$order]
-                           dat <- as.data.frame(scale_df)%>%
-                             rownames_to_column(var = "gene")%>%
-                             tidyr::gather(key = "cluster",value = "expression",-gene)
+
                            dat$gene <- factor(dat$gene,levels = roworder)
                            if(show_cluster_rows){
                              row_ggtreeplot <- fviz_dend(row_clust, k = cluster_num[1],
@@ -123,7 +124,7 @@ ggheatmap <- function(data,
 
 
                         if(cluster_cols){
-                           cols_clust <-  hclust(dist(df %>% as.matrix()%>% t(),method = dist_method),method = hclust_method)
+                           cols_clust <-  hclust(dist(scale_df %>% as.matrix()%>% t(),method = dist_method),method = hclust_method)
                            colorder <- cols_clust$labels[cols_clust$order]
                            dat$cluster <- factor(dat$cluster,levels = colorder)
                            if(show_cluster_cols){
