@@ -1,10 +1,10 @@
 # ggheatmap
-ggplot2 version of heatmap
+ggplot2 Version of Heatmap
 
-# Install Package
+## Install Package
 ` devtools::install_github("XiaoLuo-boy/ggheatmap")`
 
-# Parameter Description
+## Parameter Description
 * **data**	input data(matrix or data.frame)
 * **color**	the color of heatmap
 * **legendName**	character,the title of heatmap legend
@@ -39,7 +39,7 @@ ggplot2 version of heatmap
 * **levels_rows**	a character for y-axis label levels
 * **levels_cols**	a character for x-axis label levels
 
-# Usage
+## Usage
 ```
 library(ggheatmap)
 library(aplot)
