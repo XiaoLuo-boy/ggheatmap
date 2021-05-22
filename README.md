@@ -80,4 +80,4 @@ p <- ggplot(dat,aes(x=1,y=gene,size=marker,color=shape,shape=shape))+
   guides(size = FALSE)  
 ggheatmap%>%insert_right(p,width = 0.1)
 ```
-![ggheatmap](https://gitee.com/XiaoLuo-boy/markdown_figure/raw/master/./img/image-20210522183329450.png)
+![ggheatmap](http://github.com/XiaoLuo-boy/ggheatmap/blob/main/ggheatmap.png)
