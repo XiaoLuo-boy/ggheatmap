@@ -1,16 +1,16 @@
 Package: ggheatmap
-Title: ggplot2 version of heatmap
+Title: ggplot2 Version of Heatmap
 Version: 1.0
 Authors@R: 
     person(given = "Baiwei",
            family = "Luo",
            role = c("aut", "cre"),
            email = "2734782653@qq.com",
-           comment = c(ORCID = "YOUR-ORCID-ID"))
+           comment = c(ORCID = "https://orcid.org/0000-0002-0374-5724"))
 Description: This R package can basically meet the main functions of pheatmap, while being more flexible in visualization.
 License: GPL-3
 Encoding: UTF-8
-LazyData: true
+LazyData: false
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
 Depends: 

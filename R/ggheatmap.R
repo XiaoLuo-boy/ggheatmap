@@ -1,5 +1,5 @@
 #' @name ggheatmap
-#' @title ggplot2 version of heatmap
+#' @title ggplot2 Version of Heatmap
 #' @author Baiwei Luo
 #' @param data input data(matrix or data.frame)
 #' @param color the color of heatmap
@@ -267,12 +267,12 @@ ggheatmap <- function(data,
                               scale_fill_gradientn(colours = color)+
                               scale_y_discrete(position = text_position_rows,breaks=text_rows)+
                               scale_x_discrete(position = text_position_cols,breaks=text_cols)+
-                              theme(axis.title.x = element_blank(),                 #x坐标标题为空
-                                    axis.title.y = element_blank(),                 #y坐标标题为空
+                              theme(axis.title.x = element_blank(),
+                                    axis.title.y = element_blank(),
                                     axis.ticks = element_blank(),
-                                    panel.background = element_rect(fill = "white", colour = "white"), #背景填充为白色，边框灰色
-                                    legend.key = element_rect(fill = "white", colour = "white"),#图例背景填充为白色，边框灰色
-                                    axis.text.x = element_text(face = text_face_cols,       #坐标标签微调
+                                    panel.background = element_rect(fill = "white", colour = "white"),
+                                    legend.key = element_rect(fill = "white", colour = "white"),
+                                    axis.text.x = element_text(face = text_face_cols,
                                                                angle = text_angle_cols,
                                                                color = text_color_cols,
                                                                hjust = text_just_cols[1],

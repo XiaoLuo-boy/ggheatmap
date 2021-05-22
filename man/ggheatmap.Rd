@@ -2,7 +2,7 @@
 % Please edit documentation in R/ggheatmap.R
 \name{ggheatmap}
 \alias{ggheatmap}
-\title{ggplot2 version of heatmap}
+\title{ggplot2 Version of Heatmap}
 \arguments{
 \item{data}{input data(matrix or data.frame)}
 
@@ -74,7 +74,7 @@
 p
 }
 \description{
-ggplot2 version of heatmap
+ggplot2 Version of Heatmap
 }
 \examples{
 #Create data
