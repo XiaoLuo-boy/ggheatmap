@@ -1,6 +1,6 @@
 Package: ggheatmap
 Title: ggplot2 version of heatmap
-Version: 0.0.0.9000
+Version: 1.0
 Authors@R: 
     person(given = "Baiwei",
            family = "Luo",

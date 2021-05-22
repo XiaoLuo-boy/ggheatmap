@@ -16,9 +16,9 @@
 
 \item{cluster_cols}{whether column should be clustered(TRUE of FALSE)}
 
-\item{dist_method}{character,the method parameter of dist function}
+\item{dist_method}{character,the method parameter of dist function. see \link{dist}}
 
-\item{hclust_method}{character,the method parameter of hclust function}
+\item{hclust_method}{character,the method parameter of hclust function, see \link{hclust}}
 
 \item{text_angle_rows}{numeric,the angle of y-axis label}
 
@@ -28,9 +28,9 @@
 
 \item{text_color_cols}{character,the color of x-axis label}
 
-\item{text_face_rows}{character,the face of y-axis label}
+\item{text_face_rows}{character,the face of y-axis label, see \link{element_text}}
 
-\item{text_face_cols}{character,the face of x-axis label}
+\item{text_face_cols}{character,the face of x-axis label, see \link{element_text}}
 
 \item{text_just_rows}{a vector(hjust,vjust) for the hjust/vjust of y-axis label}
 
@@ -71,6 +71,103 @@ p
 }
 \description{
 ggplot2 version of heatmap
+}
+\examples{
+#Create data
+library(ggheatmap)
+set.seed(123)
+df <- matrix(runif(600,0,10),ncol = 12)
+colnames(df) <- paste("sample",1:12,sep = "")
+rownames(df) <- sapply(1:50, function(x)paste(sample(LETTERS,3,replace = FALSE),collapse = ""))
+head(df)
+
+#example 1:The usage of cluster_rows/cluster_cols
+ggheatmap(df,cluster_rows = TRUE,cluster_cols = TRUE)
+ggheatmap(df,cluster_rows = TRUE,cluster_cols = FALSE)
+
+#example 2:Scale data
+ggheatmap(df,cluster_rows = TRUE,cluster_cols = TRUE,scale = "column")
+ggheatmap(df,cluster_rows = TRUE,cluster_cols = TRUE,scale = "row")
+
+#example 3:Set legend title
+ggheatmap(df,cluster_rows = TRUE,cluster_cols = TRUE,legendName = "score")
+ggheatmap(df,cluster_rows = TRUE,cluster_cols = TRUE,legendName = NULL)
+
+#example 4:Adjust the coordinate label
+ggheatmap(df,cluster_rows = TRUE,cluster_cols = TRUE,text_angle_rows = 330,text_just_rows = c(1,0))
+ggheatmap(df,cluster_rows = TRUE,cluster_cols = TRUE,text_angle_cols = 45,text_just_cols = c(1,1))
+
+#example 5:Custom label color
+ggheatmap(df,cluster_rows = TRUE,cluster_cols = TRUE,text_color_cols = "red")
+ggheatmap(df,cluster_rows = TRUE,cluster_cols = TRUE,
+            text_color_cols = c(rep("black",6),"red",rep("black",5)))
+
+#example 6:Custom label face
+ggheatmap(df,cluster_rows = TRUE,cluster_cols = TRUE,text_face_rows = "bold")
+ggheatmap(df,cluster_rows = TRUE,cluster_cols = TRUE,
+          text_color_rows = c("red",rep("black",49)),
+          text_face_rows = c("bold",rep("italic",49)))
+
+#example 7:Adjust the color and height of the cluster tree
+ggheatmap(df,cluster_rows = TRUE,cluster_cols = TRUE,show_cluster_cols = FALSE)
+ggheatmap(df,cluster_rows = TRUE,cluster_cols = TRUE,tree_height_rows = 0.05,
+           tree_height_cols = 0.05)
+ggheatmap(df,cluster_rows = TRUE,cluster_cols = TRUE,cluster_num = c(5,4))
+ggheatmap(df,cluster_rows = TRUE,cluster_cols = TRUE,cluster_num = c(5,4),
+          tree_color_rows = c("#3B4992FF","#EE0000FF","#008B45FF",
+          "#631879FF","#008280FF"),
+          tree_color_cols = c("#0073C2FF", "#EFC000FF" ,"#868686FF", "#CD534CFF"))
+
+#example 8:Comprehensive usage1
+text_rows <- sample(rownames(df),3)
+ggheatmap(df,scale = "row",cluster_rows  = TRUE,cluster_cols = TRUE,cluster_num = c(2,3),
+          text_show_rows = text_rows,
+          text_face_rows = "bold",
+          text_color_rows = "red",
+          text_angle_cols = 45,
+          text_just_cols = c(1,1),
+          tree_color_rows = c( "#3B4992FF","#EE0000FF"),
+          tree_color_cols = c("#1F77B4FF","#FF7F0EFF","#2CA02CFF"))
+
+#sample 9:Annotation
+row_metaData <- data.frame(exprtype=sample(c("Up","Down"),50,replace = TRUE),
+                           genetype=sample(c("Metabolism","Immune","None"),50,replace = TRUE))
+rownames(row_metaData) <- rownames(df)
+col_metaData <- data.frame(tissue=sample(c("Normal","Tumor"),12,replace = TRUE),
+                           risklevel=sample(c("High","Low"),12,replace = TRUE))
+rownames(col_metaData) <- colnames(df)
+exprcol <- c("#EE0000FF","#008B45FF" )
+names(exprcol) <- c("Up","Down")
+genecol <- c("#EE7E30","#5D9AD3","#D0DFE6FF")
+names(genecol) <- c("Metabolism","Immune","None")
+tissuecol <- c("#98D352","#FF7F0E")
+names(tissuecol) <- c("Normal","Tumor")
+riskcol <- c("#EEA236FF","#46B8DAFF")
+names(riskcol) <- c("High","Low")
+col <- list(exprtype=exprcol,genetype=genecol,tissue=tissuecol,risklevel=riskcol)
+
+ggheatmap<- ggheatmap(df,cluster_rows = TRUE,cluster_cols = TRUE,scale = "row",
+                      cluster_num = c(5,3),
+                      tree_color_rows = c("#3B4992FF","#EE0000FF","#008B45FF",
+                      "#631879FF","#008280FF"),
+                      tree_color_cols = c("#1F77B4FF","#FF7F0EFF","#2CA02CFF"),
+                      annotation_rows = row_metaData,
+                      annotation_cols = col_metaData,
+                      annotation_color = col
+)
+
+#sample 10:Comprehensive usage2
+library(aplot)
+dat <- data.frame(marker=sample(c(1,NA),50,replace = TRUE),
+                  gene=rownames(df),
+                  shape=sample(c("T","F"),50,replace = TRUE))
+p <- ggplot(dat,aes(x=1,y=gene,size=marker,color=shape,shape=shape))+
+  geom_point()+theme_classic()+
+  scale_color_manual(values = c("#D2691E","#1E87D2"))+
+  theme(line = element_blank(),axis.text = element_blank(),axis.title = element_blank())+
+  guides(size = FALSE)
+
+ggheatmap\%>\%insert_right(p,width = 0.1)
 }
 \author{
 Baiwei Luo
