@@ -5,39 +5,39 @@ ggplot2 version of heatmap
 ` devtools::install_github("XiaoLuo-boy/ggheatmap")`
 
 # Parameter Description
-**data**	input data(matrix or data.frame)
-**color**	the color of heatmap
-**legendName**	character,the title of heatmap legend
-**scale**	character,the way of scale data("none", "row" or "column")
-**cluster_rows**	whether rows should be clustered(TRUE of FALSE)
-**cluster_cols**	whether column should be clustered(TRUE of FALSE)
-**dist_method**	character,the method parameter of dist function. see dist
-**hclust_method**	character,the method parameter of hclust function, see hclust
-**text_angle_rows**	numeric,the angle of y-axis label
-**text_angle_cols**	numeric,the angle of x-axis label
-**text_color_rows**	character,the color of y-axis label
-**text_color_cols**	character,the color of x-axis label
-**text_face_rows**	character,the face of y-axis label, see element_text
-**text_face_cols**	character,the face of x-axis label, see element_text
-**text_just_rows**	a vector(hjust,vjust) for the hjust/vjust of y-axis label
-**text_just_cols**	a vector(hjust,vjust) for the hjust/vjust of x-axis label
-**text_show_rows**	a character you want to show for y-axis
-**text_show_cols**	a character you want to show for x-axis
-**text_position_rows**	character,the position of y-axis label("right" or "left")
-**text_position_cols**	character,the position of x-axis label("bottom" or "top")
-**annotation_cols**	a data.frame for column annotation
-**annotation_rows**	a data.frame for row annotation
-**annotation_color**	a list for annotation color
-**annotation_width**	a numeric for annotation width
-**show_cluster_cols**	whether show column cluster tree(TRUE of FALSE)
-**show_cluster_rows**	whether show row cluster tree(TRUE of FALSE)
-**cluster_num**	a numeric for cut cluster tree
-**tree_height_rows**	row cluster tree height
-**tree_height_cols**	column cluster tree height
-**tree_color_rows**	a character for row cluster tree color
-**tree_color_cols**	a character for column cluster tree color
-**levels_rows**	a character for y-axis label levels
-**levels_cols**	a character for x-axis label levels
+* **data**	input data(matrix or data.frame)
+* **color**	the color of heatmap
+* **legendName**	character,the title of heatmap legend
+* **scale**	character,the way of scale data("none", "row" or "column")
+* **cluster_rows**	whether rows should be clustered(TRUE of FALSE)
+* **cluster_cols**	whether column should be clustered(TRUE of FALSE)
+* **dist_method**	character,the method parameter of dist function. see dist
+* **hclust_method**	character,the method parameter of hclust function, see hclust
+* **text_angle_rows**	numeric,the angle of y-axis label
+* **text_angle_cols**	numeric,the angle of x-axis label
+* **text_color_rows**	character,the color of y-axis label
+* **text_color_cols**	character,the color of x-axis label
+* **text_face_rows**	character,the face of y-axis label, see element_text
+* **text_face_cols**	character,the face of x-axis label, see element_text
+* **text_just_rows**	a vector(hjust,vjust) for the hjust/vjust of y-axis label
+* **text_just_cols**	a vector(hjust,vjust) for the hjust/vjust of x-axis label
+* **text_show_rows**	a character you want to show for y-axis
+* **text_show_cols**	a character you want to show for x-axis
+* **text_position_rows**	character,the position of y-axis label("right" or "left")
+* **text_position_cols**	character,the position of x-axis label("bottom" or "top")
+* **annotation_cols**	a data.frame for column annotation
+* **annotation_rows**	a data.frame for row annotation
+* **annotation_color**	a list for annotation color
+* **annotation_width**	a numeric for annotation width
+* **show_cluster_cols**	whether show column cluster tree(TRUE of FALSE)
+* **show_cluster_rows**	whether show row cluster tree(TRUE of FALSE)
+* **cluster_num**	a numeric for cut cluster tree
+* **tree_height_rows**	row cluster tree height
+* **tree_height_cols**	column cluster tree height
+* **tree_color_rows**	a character for row cluster tree color
+* **tree_color_cols**	a character for column cluster tree color
+* **levels_rows**	a character for y-axis label levels
+* **levels_cols**	a character for x-axis label levels
 
 # Usage
 ```
