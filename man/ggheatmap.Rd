@@ -40,6 +40,10 @@
 
 \item{text_show_cols}{a character you want to show for x-axis}
 
+\item{text_position_rows}{character,the position of y-axis label("right" or "left")}
+
+\item{text_position_cols}{character,the position of x-axis label("bottom" or "top")}
+
 \item{annotation_cols}{a data.frame for column annotation}
 
 \item{annotation_rows}{a data.frame for row annotation}

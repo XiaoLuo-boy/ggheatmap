@@ -19,6 +19,8 @@
 #' @param text_just_cols a vector(hjust,vjust) for the hjust/vjust of x-axis label
 #' @param text_show_rows a character you want to show for y-axis
 #' @param text_show_cols a character you want to show for x-axis
+#' @param text_position_rows character,the position of y-axis label("right" or "left")
+#' @param text_position_cols character,the position of x-axis label("bottom" or "top")
 #' @param annotation_cols a data.frame for column annotation
 #' @param annotation_rows a data.frame for row annotation
 #' @param annotation_color a list for annotation color
