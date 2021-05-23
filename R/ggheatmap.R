@@ -117,7 +117,7 @@
 #' names(riskcol) <- c("High","Low")
 #' col <- list(exprtype=exprcol,genetype=genecol,tissue=tissuecol,risklevel=riskcol)
 #'
-#' ggheatmap<- ggheatmap(df,cluster_rows = TRUE,cluster_cols = TRUE,scale = "row",
+#' ggheatmap(df,cluster_rows = TRUE,cluster_cols = TRUE,scale = "row",
 #'                       cluster_num = c(5,3),
 #'                       tree_color_rows = c("#3B4992FF","#EE0000FF","#008B45FF",
 #'                       "#631879FF","#008280FF"),
@@ -127,18 +127,6 @@
 #'                       annotation_color = col
 #' )
 #'
-#' #sample 10:Comprehensive usage2
-#' library(aplot)
-#' dat <- data.frame(marker=sample(c(1,NA),50,replace = TRUE),
-#'                   gene=rownames(df),
-#'                   shape=sample(c("T","F"),50,replace = TRUE))
-#' p <- ggplot(dat,aes(x=1,y=gene,size=marker,color=shape,shape=shape))+
-#'   geom_point()+theme_classic()+
-#'   scale_color_manual(values = c("#D2691E","#1E87D2"))+
-#'   theme(line = element_blank(),axis.text = element_blank(),axis.title = element_blank())+
-#'   guides(size = FALSE)
-#'
-#' ggheatmap%>%insert_right(p,width = 0.1)
 #' @export
 NULL
 
@@ -177,6 +165,8 @@ ggheatmap <- function(data,
                        levels_rows=NULL,
                        levels_cols=NULL
                        ){
+                         gene=NULL
+                         cluster=NULL
   #step1.scale data
                          if(scale=="column"){
                          scale_df <- scale(data)
@@ -187,8 +177,8 @@ ggheatmap <- function(data,
                        }
   #step2. draw cluster tree
                         dat <- as.data.frame(scale_df)%>%
-                           rownames_to_column(var = "gene")%>%
-                           tidyr::gather(key = "cluster",value = "expression",-gene)
+                             rownames_to_column(var = "gene")%>%
+                             tidyr::gather(key = "cluster",value = "expression",-gene)
                          if(cluster_rows){
                            row_clust <- hclust(dist(as.matrix(scale_df),method = dist_method),method = hclust_method)
                            roworder <- row_clust$labels[row_clust$order]
@@ -210,6 +200,7 @@ ggheatmap <- function(data,
                              row_ggtreeplot <- NULL
                            }
                          }else{
+
                            dat <- as.data.frame(scale_df)%>%
                              rownames_to_column(var = "gene")%>%
                              tidyr::gather(key = "cluster",value = "expression",-gene)
@@ -261,8 +252,8 @@ ggheatmap <- function(data,
                           }else{text_cols <- text_show_cols}
 
   #step4.Draw the main body of the heatmap
-
-                          p <- ggplot(dat, aes(cluster, gene, fill= expression)) +
+                          ggdat <- dat
+                          p <- ggplot(ggdat, aes(cluster, gene, fill= expression)) +
                               geom_tile() +
                               scale_fill_gradientn(colours = color)+
                               scale_y_discrete(position = text_position_rows,breaks=text_rows)+
