@@ -378,14 +378,14 @@ ggheatmap <- function(data,
     if(tree_position_rows=="left"){
       p <- p%>%insert_left(row_ggtreeplot,width = tree_height_rows)
     }else{
-      p <- p%>%insert_right(row_ggtreeplot,width = tree_height_rows)
+      p <- p%>%insert_right(row_ggtreeplot+scale_y_continuous(),width = tree_height_rows)
     }
   }
   if(!is.null(col_ggtreeplot)){
     if(tree_position_cols=="top"){
       p <- p%>%insert_top(col_ggtreeplot,height = tree_height_cols)
     }else{
-    p <- p%>%insert_bottom(col_ggtreeplot,height = tree_height_cols)
+    p <- p%>%insert_bottom(col_ggtreeplot+scale_y_reverse(),height = tree_height_cols)
     }
   }
   return(p)
