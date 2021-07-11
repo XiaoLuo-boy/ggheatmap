@@ -1,29 +1,38 @@
 Package: ggheatmap
-Title: ggplot2 Version of Heatmap
-Version: 1.0
+Title: Plot Heatmap
+Version: 1.1
 Authors@R: 
     person(given = "Baiwei",
            family = "Luo",
            role = c("aut", "cre"),
-           email = "2734782653@qq.com",
-           comment = c(ORCID = "https://orcid.org/0000-0002-0374-5724"))
+           email = "2734782653@qq.com")
 Maintainer: Baiwei Luo <2734782653@qq.com>
-Description: This R package can basically meet the main functions of pheatmap, while being more flexible in visualization.
+Description: The flexibility and excellence of 'ggplot2' is unquestionable, 
+    so many drawing tools basically need 'ggplot2' as the operating object. 
+    In order to develop a heatmap drawing system based on ggplot2, we developed 
+    this tool, mainly to solve the heatmap puzzle problem and the flexible 
+    connection between the heatmap and the 'ggplot2' object.
+    The advantages of this tool are as follows: 
+    1. More flexible label settings; 
+    2. Realize the linkage of heatmap and 'ggplot2' drawing system, 
+       which is helpful for operations such as puzzles; 
+    3. Simple and easy to operate; 
+    4. Optimization of clustering tree visualization.
 License: GPL-3
 Encoding: UTF-8
 LazyData: false
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
 Depends: 
-    ggpubr,
-    ggplot2,
-    tibble,
-    factoextra,
-    tidyr,
-    grDevices,
-    stats
-Suggests: 
-    testthat (>= 3.0.0)
-Config/testthat/edition: 3
+    ggplot2
 Imports: 
-    aplot
+    aplot,
+    factoextra,
+    tibble,
+    ggpubr,
+    tidyr,
+    patchwork
+Suggests: 
+    grDevices,
+    stats,
+    testthat
