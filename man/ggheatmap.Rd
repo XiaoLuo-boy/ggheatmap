@@ -112,6 +112,7 @@ ggheatmap(df,cluster_rows = TRUE,cluster_cols = TRUE,
 
 
 #sample 3
+\donttest{
 row_metaData <- data.frame(exprtype=sample(c("Up","Down"),50,replace = TRUE),
 genetype=sample(c("Metabolism","Immune","None"),50,replace = TRUE))
 rownames(row_metaData) <- rownames(df)
@@ -146,6 +147,7 @@ ggheatmap_theme(p,2:5,theme = list(
 ))
 
 
+
 #sample 4
 ggheatmap(df,cluster_rows = TRUE,cluster_cols = TRUE,scale = "row",
           cluster_num = c(5,3),
@@ -168,7 +170,7 @@ p1 <- ggplot(dat,aes(x=1,y=gene,size=marker,color=shape,shape=shape))+
   guides(size = FALSE)
 
 p\%>\%insert_right(p1,width = 0.1)
-
+}
 
 
 }

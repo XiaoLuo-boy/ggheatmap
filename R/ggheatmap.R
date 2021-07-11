@@ -83,6 +83,7 @@
 #'
 #'
 #' #sample 3
+#' \donttest{
 #' row_metaData <- data.frame(exprtype=sample(c("Up","Down"),50,replace = TRUE),
 #' genetype=sample(c("Metabolism","Immune","None"),50,replace = TRUE))
 #' rownames(row_metaData) <- rownames(df)
@@ -117,6 +118,7 @@
 #' ))
 #'
 #'
+#'
 #' #sample 4
 #' ggheatmap(df,cluster_rows = TRUE,cluster_cols = TRUE,scale = "row",
 #'           cluster_num = c(5,3),
@@ -139,7 +141,7 @@
 #'   guides(size = FALSE)
 #'
 #' p%>%insert_right(p1,width = 0.1)
-#'
+#'}
 #'
 #'
 #' @export
@@ -271,11 +273,11 @@ ggheatmap <- function(data,
       scale_fill_gradientn(colours = color)+
       scale_y_discrete(position = text_position_rows,breaks=text_rows)+
       scale_x_discrete(position = text_position_cols,breaks=text_cols)+
-      theme(axis.title.x = element_blank(),                 #x坐标标题为空
-            axis.title.y = element_blank(),                 #y坐标标题为空
+      theme(axis.title.x = element_blank(),
+            axis.title.y = element_blank(),
             axis.ticks = element_blank(),
-            panel.background = element_rect(fill = "white", colour = "white"), #背景填充为白色，边框灰色
-            legend.key = element_rect(fill = "white", colour = "white"),#图例背景填充为白色，边框灰色
+            panel.background = element_rect(fill = "white", colour = "white"),
+            legend.key = element_rect(fill = "white", colour = "white")
       )+
       labs(fill=legendName)
   }else{
@@ -286,11 +288,11 @@ ggheatmap <- function(data,
         scale_color_gradientn(colours = color)+
         scale_y_discrete(position = text_position_rows,breaks=text_rows)+
         scale_x_discrete(position = text_position_cols,breaks=text_cols)+
-        theme(axis.title.x = element_blank(),                 #x坐标标题为空
-              axis.title.y = element_blank(),                 #y坐标标题为空
+        theme(axis.title.x = element_blank(),
+              axis.title.y = element_blank(),
               axis.ticks = element_blank(),
-              panel.background = element_rect(fill = "white", colour = "white"), #背景填充为白色，边框灰色
-              legend.key = element_rect(fill = "white", colour = "white"),#图例背景填充为白色，边框灰色
+              panel.background = element_rect(fill = "white", colour = "white"),
+              legend.key = element_rect(fill = "white", colour = "white")
         )+
         labs(colour=legendName)
     }else{
@@ -301,11 +303,11 @@ ggheatmap <- function(data,
           scale_color_gradientn(colours = color)+
           scale_y_discrete(position = text_position_rows,breaks=text_rows)+
           scale_x_discrete(position = text_position_cols,breaks=text_cols)+
-          theme(axis.title.x = element_blank(),                 #x坐标标题为空
-                axis.title.y = element_blank(),                 #y坐标标题为空
+          theme(axis.title.x = element_blank(),
+                axis.title.y = element_blank(),
                 axis.ticks = element_blank(),
-                panel.background = element_rect(fill = "white", colour = "white"), #背景填充为白色，边框灰色
-                legend.key = element_rect(fill = "white", colour = "white"),#图例背景填充为白色，边框灰色
+                panel.background = element_rect(fill = "white", colour = "white"),
+                legend.key = element_rect(fill = "white", colour = "white")
           )+
           labs(colour=legendName)
       }else{
@@ -316,11 +318,11 @@ ggheatmap <- function(data,
             scale_color_gradientn(colours = color)+
             scale_y_discrete(position = text_position_rows,breaks=text_rows)+
             scale_x_discrete(position = text_position_cols,breaks=text_cols)+
-            theme(axis.title.x = element_blank(),                 #x坐标标题为空
-                  axis.title.y = element_blank(),                 #y坐标标题为空
+            theme(axis.title.x = element_blank(),
+                  axis.title.y = element_blank(),
                   axis.ticks = element_blank(),
-                  panel.background = element_rect(fill = "white", colour = "white"), #背景填充为白色，边框灰色
-                  legend.key = element_rect(fill = "white", colour = "white"),#图例背景填充为白色，边框灰色
+                  panel.background = element_rect(fill = "white", colour = "white"),
+                  legend.key = element_rect(fill = "white", colour = "white")
             )+
             labs(colour=legendName)
         }else{
@@ -329,8 +331,6 @@ ggheatmap <- function(data,
       }
     }
   }
-
-  #
 
 
   #step5.draw your annotation
