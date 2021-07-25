@@ -11,6 +11,39 @@
 #'        which is helpful for operations such as puzzles;
 #'     3. Simple and easy to operate;
 #'     4. Optimization of clustering tree visualization.
+#' @usage
+#' ggheatmap(data,
+#'   color=colorRampPalette(c( "#0073c2","white","#efc000"))(100),
+#'   legendName="Express",
+#'   scale="none",
+#'   shape=NULL,
+#'   border=NA,
+#'   cluster_rows = F,
+#'   cluster_cols = F,
+#'   dist_method="euclidean",
+#'   hclust_method="complete",
+#'   text_show_rows=waiver(),
+#'   text_show_cols=waiver(),
+#'   text_position_rows="right",
+#'   text_position_cols="bottom",
+#'   annotation_cols=NULL,
+#'   annotation_rows=NULL,
+#'   annotation_color,
+#'   annotation_width=0.03,
+#'   annotation_position_rows="left",
+#'   annotation_position_cols="top",
+#'   show_cluster_cols=T,
+#'   show_cluster_rows=T,
+#'   cluster_num=NULL,
+#'   tree_height_rows=0.1,
+#'   tree_height_cols=0.1,
+#'   tree_color_rows=NULL,
+#'   tree_color_cols=NULL,
+#'   tree_position_rows="left",
+#'   tree_position_cols="top",
+#'   levels_rows=NULL,
+#'   levels_cols=NULL
+#' )
 #' @author Baiwei Luo
 #' @param data input data(matrix or data.frame)
 #' @param color the color of heatmap
@@ -178,7 +211,7 @@ ggheatmap <- function(data,
                       tree_position_cols="top",
                       levels_rows=NULL,
                       levels_cols=NULL
-                      
+
 ){
   gene=NULL
   cluster=NULL
@@ -197,7 +230,7 @@ ggheatmap <- function(data,
   if(cluster_rows){
     row_clust <- hclust(dist(as.matrix(scale_df),method = dist_method),method = hclust_method)
     roworder <- row_clust$labels[row_clust$order]
-    
+
     dat$gene <- factor(dat$gene,levels = roworder)
     if(show_cluster_rows){
       row_ggtreeplot <- fviz_dend(row_clust, k = cluster_num[1],
@@ -215,7 +248,7 @@ ggheatmap <- function(data,
       row_ggtreeplot <- NULL
     }
   }else{
-    
+
     dat <- as.data.frame(scale_df)%>%
       rownames_to_column(var = "gene")%>%
       tidyr::gather(key = "cluster",value = "expression",-gene)
@@ -224,11 +257,11 @@ ggheatmap <- function(data,
     }else{
       dat$gene <- as.factor(dat$gene)
     }
-    
+
     row_ggtreeplot <- NULL
   }
-  
-  
+
+
   if(cluster_cols){
     cols_clust <-  hclust(dist(t(as.matrix(scale_df)),method = dist_method),method = hclust_method)
     colorder <- cols_clust$labels[cols_clust$order]
@@ -253,20 +286,20 @@ ggheatmap <- function(data,
     }else{
       dat$cluster <- as.factor(dat$cluster)
     }
-    
+
     col_ggtreeplot <- NULL
   }
   #step3.axis label
-  
+
   if(is.character(text_show_rows)){
     text_rows <- as.character(sapply(levels(dat$gene),function(x){ifelse(!x%in%text_show_rows,NA,x)}))
   }else{text_rows <- text_show_rows}
   if(is.character(text_show_cols)){
     text_cols <- as.character(sapply(levels(dat$cluster),function(x){ifelse(!x%in%text_show_cols,NA,x)}))
   }else{text_cols <- text_show_cols}
-  
+
   #step4.Draw the main body of the heatmap
-  
+
   if(is.null(shape)){
     p <- ggplot(dat, aes(cluster, gene, fill= expression)) +
       geom_tile(colour=border) +
@@ -331,8 +364,8 @@ ggheatmap <- function(data,
       }
     }
   }
-  
-  
+
+
   #step5.draw your annotation
   if(!is.null(annotation_rows)){
     annotation_rows <- rownames_to_column(annotation_rows,var = "none1")
@@ -376,10 +409,10 @@ ggheatmap <- function(data,
   }else{
     colanno <- NULL
   }
-  
+
   #step6.Merge pictures
-  
-  
+
+
   if(!is.null(row_ggtreeplot)){
     if(tree_position_rows=="left"){
       p <- p%>%insert_left(row_ggtreeplot,width = tree_height_rows)

@@ -3,6 +3,40 @@
 \name{ggheatmap}
 \alias{ggheatmap}
 \title{ggplot2 Version of Heatmap}
+\usage{
+ggheatmap(data,
+color=colorRampPalette(c( "#0073c2","white","#efc000"))(100),
+legendName="Express",
+scale="none",
+shape=NULL,
+border=NA,
+cluster_rows = F,
+cluster_cols = F,
+dist_method="euclidean",
+hclust_method="complete",
+text_show_rows=waiver(),
+text_show_cols=waiver(),
+text_position_rows="right",
+text_position_cols="bottom",
+annotation_cols=NULL,
+annotation_rows=NULL,
+annotation_color,
+annotation_width=0.03,
+annotation_position_rows="left",
+annotation_position_cols="top",
+show_cluster_cols=T,
+show_cluster_rows=T,
+cluster_num=NULL,
+tree_height_rows=0.1,
+tree_height_cols=0.1,
+tree_color_rows=NULL,
+tree_color_cols=NULL,
+tree_position_rows="left",
+tree_position_cols="top",
+levels_rows=NULL,
+levels_cols=NULL
+)
+}
 \arguments{
 \item{data}{input data(matrix or data.frame)}
 
