@@ -178,7 +178,7 @@ ggheatmap <- function(data,
                       tree_position_cols="top",
                       levels_rows=NULL,
                       levels_cols=NULL
-
+                      
 ){
   gene=NULL
   cluster=NULL
@@ -197,7 +197,7 @@ ggheatmap <- function(data,
   if(cluster_rows){
     row_clust <- hclust(dist(as.matrix(scale_df),method = dist_method),method = hclust_method)
     roworder <- row_clust$labels[row_clust$order]
-
+    
     dat$gene <- factor(dat$gene,levels = roworder)
     if(show_cluster_rows){
       row_ggtreeplot <- fviz_dend(row_clust, k = cluster_num[1],
@@ -215,7 +215,7 @@ ggheatmap <- function(data,
       row_ggtreeplot <- NULL
     }
   }else{
-
+    
     dat <- as.data.frame(scale_df)%>%
       rownames_to_column(var = "gene")%>%
       tidyr::gather(key = "cluster",value = "expression",-gene)
@@ -224,11 +224,11 @@ ggheatmap <- function(data,
     }else{
       dat$gene <- as.factor(dat$gene)
     }
-
+    
     row_ggtreeplot <- NULL
   }
-
-
+  
+  
   if(cluster_cols){
     cols_clust <-  hclust(dist(t(as.matrix(scale_df)),method = dist_method),method = hclust_method)
     colorder <- cols_clust$labels[cols_clust$order]
@@ -253,20 +253,20 @@ ggheatmap <- function(data,
     }else{
       dat$cluster <- as.factor(dat$cluster)
     }
-
+    
     col_ggtreeplot <- NULL
   }
   #step3.axis label
-
+  
   if(is.character(text_show_rows)){
     text_rows <- as.character(sapply(levels(dat$gene),function(x){ifelse(!x%in%text_show_rows,NA,x)}))
   }else{text_rows <- text_show_rows}
   if(is.character(text_show_cols)){
     text_cols <- as.character(sapply(levels(dat$cluster),function(x){ifelse(!x%in%text_show_cols,NA,x)}))
   }else{text_cols <- text_show_cols}
-
+  
   #step4.Draw the main body of the heatmap
-
+  
   if(is.null(shape)){
     p <- ggplot(dat, aes(cluster, gene, fill= expression)) +
       geom_tile(colour=border) +
@@ -331,18 +331,21 @@ ggheatmap <- function(data,
       }
     }
   }
-
-
+  
+  
   #step5.draw your annotation
   if(!is.null(annotation_rows)){
-    annotation_rows$none <- factor(rep(1,nrow(annotation_rows)))
     annotation_rows <- rownames_to_column(annotation_rows,var = "none1")
-    for(i in 1:(ncol(annotation_rows)-2)){
+    for(i in 1:(ncol(annotation_rows)-1)){
+      annotation_rows$none <- factor(rep(names(annotation_rows)[i+1],nrow(annotation_rows)))
       rowlist <- list()
       rowanno <- ggplot()+
         geom_exec(geom_tile,data = annotation_rows,x="none1",y="none",fill=names(annotation_rows)[i+1])+
         scale_fill_manual(values =annotation_color[names(annotation_color)==names(annotation_rows)[i+1]][[1]])+
-        theme_void()+coord_flip()+labs(fill=names(annotation_rows)[i+1])
+        theme(axis.title = element_blank(),axis.text.y = element_blank(),
+              axis.ticks = element_blank(),panel.background = element_blank(),
+              axis.text.x.bottom = element_text(angle = 90,hjust = 0.5,vjust = 0.5))+
+        coord_flip()+labs(fill=names(annotation_rows)[i+1])
       if(annotation_position_rows=="left"){
         p <- p%>%insert_left(rowanno,width =annotation_width )
       }else{
@@ -353,14 +356,17 @@ ggheatmap <- function(data,
     rowanno <- NULL
   }
   if(!is.null(annotation_cols)){
-    annotation_cols$none <- factor(rep(1,nrow(annotation_cols)))
     annotation_cols <- rownames_to_column(annotation_cols,var = "none1")
-    for(i in 1:(ncol(annotation_cols)-2)){
+    for(i in 1:(ncol(annotation_cols)-1)){
+      annotation_cols$none <- factor(rep(names(annotation_cols)[i+1],nrow(annotation_cols)))
       collist <- list()
       colanno <- ggplot()+
         geom_exec(geom_tile,data = annotation_cols,x="none1",y="none",fill=names(annotation_cols)[i+1])+
         scale_fill_manual(values = annotation_color[names(annotation_color)==names(annotation_cols)[i+1]][[1]])+
-        theme_void()+labs(fill=names(annotation_cols)[i+1])
+        scale_y_discrete(position = "right")+
+        theme(axis.title = element_blank(),axis.text.x = element_blank(),
+              axis.ticks = element_blank(),panel.background = element_blank())+
+       labs(fill=names(annotation_cols)[i+1])
       if(annotation_position_cols=="top"){
         p <- p%>%insert_top(colanno,height =annotation_width)
       }else{
@@ -370,10 +376,10 @@ ggheatmap <- function(data,
   }else{
     colanno <- NULL
   }
-
+  
   #step6.Merge pictures
-
-
+  
+  
   if(!is.null(row_ggtreeplot)){
     if(tree_position_rows=="left"){
       p <- p%>%insert_left(row_ggtreeplot,width = tree_height_rows)
@@ -385,7 +391,7 @@ ggheatmap <- function(data,
     if(tree_position_cols=="top"){
       p <- p%>%insert_top(col_ggtreeplot,height = tree_height_cols)
     }else{
-    p <- p%>%insert_bottom(col_ggtreeplot+scale_y_reverse(),height = tree_height_cols)
+      p <- p%>%insert_bottom(col_ggtreeplot+scale_y_reverse(),height = tree_height_cols)
     }
   }
   return(p)

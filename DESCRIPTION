@@ -1,6 +1,6 @@
 Package: ggheatmap
 Title: Plot Heatmap
-Version: 1.1
+Version: 2.0
 Authors@R: 
     person(given = "Baiwei",
            family = "Luo",
