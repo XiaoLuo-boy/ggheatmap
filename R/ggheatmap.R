@@ -171,7 +171,7 @@
 #'   geom_point()+theme_classic()+
 #'   scale_color_manual(values = c("#D2691E","#1E87D2"))+
 #'   theme(line = element_blank(),axis.text = element_blank(),axis.title = element_blank())+
-#'   guides(size = FALSE)
+#'   guides(size = "none")
 #'
 #' p%>%insert_right(p1,width = 0.1)
 #'}
