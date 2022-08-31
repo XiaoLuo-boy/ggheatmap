@@ -17,7 +17,7 @@ ggheatmap_theme <- function(ggheatmap,plotlist,theme){
   }else{
     for(i in 1:length(plotlist)){
       num <- plotlist[i]
-      ggheatmap[[num]] <- ggheatmap[[num]]+theme[[i]]
+      ggheatmap[[1]][[num]] <- ggheatmap[[1]][[num]]+theme[[i]]
     }
   }
   return(ggheatmap)
