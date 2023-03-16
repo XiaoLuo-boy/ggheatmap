@@ -401,7 +401,6 @@ ggheatmap <- function(data,
       colanno <- ggplot()+
         geom_exec(geom_tile,data = annotation_cols,x="none1",y="none",fill=names(annotation_cols)[i+1])+
         scale_fill_manual(values = annotation_color[names(annotation_color)==names(annotation_cols)[i+1]][[1]])+
-        scale_y_discrete(position = "right")+
         theme(axis.title = element_blank(),axis.text.x = element_blank(),
               axis.ticks = element_blank(),panel.background = element_blank())+
        labs(fill=names(annotation_cols)[i+1])+
