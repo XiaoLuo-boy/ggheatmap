@@ -233,17 +233,11 @@ ggheatmap <- function(data,
 
     dat$gene <- factor(dat$gene,levels = roworder)
     if(show_cluster_rows){
-      row_ggtreeplot <- fviz_dend(row_clust, k = cluster_num[1],
-                                  k_colors = tree_color_rows,
-                                  color_labels_by_k = TRUE,
-                                  show_labels = FALSE,
-                                  labels_track_height = 0,
-                                  horiz = TRUE,
-                                  ggtheme = theme_classic())+
-        theme(title = element_blank(),
-              axis.text.x = element_blank(),
-              axis.ticks = element_blank(),
-              axis.line.x = element_blank())
+      tree <- ape::as.phylo(row_clust)
+      row_ggtreeplot <- ggtree(tree)+
+        scale_color_subtree(cutree(row_clust,( cluster_num[1]-1)))+
+        scale_color_manual(values =tree_color_rows)+
+        theme(legend.position = "none")
     }else{
       row_ggtreeplot <- NULL
     }
@@ -267,16 +261,11 @@ ggheatmap <- function(data,
     colorder <- cols_clust$labels[cols_clust$order]
     dat$cluster <- factor(dat$cluster,levels = colorder)
     if(show_cluster_cols){
-      col_ggtreeplot <- fviz_dend(cols_clust, k = cluster_num[2],
-                                  k_colors = tree_color_cols,
-                                  color_labels_by_k = TRUE,
-                                  show_labels = FALSE,
-                                  labels_track_height = 0,
-                                  ggtheme = theme_classic())+
-        theme(title = element_blank(),
-              axis.text.y = element_blank(),
-              axis.ticks = element_blank(),
-              axis.line.x = element_blank())
+      tree <- ape::as.phylo(cols_clust)
+      col_ggtreeplot <- ggtree(tree,layout = "dendrogram")+
+        scale_color_subtree(cutree(cols_clust, cluster_num[2]-1))+
+        scale_color_manual(values =tree_color_cols)+
+        theme(legend.position = "none")
     }else{
       col_ggtreeplot <- NULL
     }
