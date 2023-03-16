@@ -1,6 +1,6 @@
 Package: ggheatmap
 Title: Plot Heatmap
-Version: 2.1
+Version: 2.11
 Authors@R: 
     person(given = "Baiwei",
            family = "Luo",
@@ -27,7 +27,7 @@ Depends:
     ggplot2
 Imports: 
     aplot,
-    factoextra,
+    ggtree,
     tibble,
     ggpubr,
     tidyr,
