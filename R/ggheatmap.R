@@ -235,9 +235,13 @@ ggheatmap <- function(data,
     if(show_cluster_rows){
       tree <- ape::as.phylo(row_clust)
       row_ggtreeplot <- ggtree(tree)+
-        scale_color_subtree(cutree(row_clust,( cluster_num[1]-1)))+
-        scale_color_manual(values =tree_color_rows)+
         theme(legend.position = "none")
+      if(!is.null(cluster_num)){
+        row_ggtreeplot <- row_ggtreeplot+
+          scale_color_subtree(cutree(row_clust,cluster_num[1]-1))+
+          scale_color_manual(values =tree_color_rows)
+          
+      }
     }else{
       row_ggtreeplot <- NULL
     }
@@ -262,10 +266,13 @@ ggheatmap <- function(data,
     dat$cluster <- factor(dat$cluster,levels = colorder)
     if(show_cluster_cols){
       tree <- ape::as.phylo(cols_clust)
-      col_ggtreeplot <- ggtree(tree,layout = "dendrogram")+
-        scale_color_subtree(cutree(cols_clust, cluster_num[2]-1))+
-        scale_color_manual(values =tree_color_cols)+
+       col_ggtreeplot <- ggtree(tree,layout = "dendrogram")+
         theme(legend.position = "none")
+      if(!is.null(cluster_num)){
+        col_ggtreeplot <- col_ggtreeplot+
+        scale_color_subtree(cutree(cols_clust, cluster_num[2]-1))+
+        scale_color_manual(values =tree_color_cols)
+        }
     }else{
       col_ggtreeplot <- NULL
     }
