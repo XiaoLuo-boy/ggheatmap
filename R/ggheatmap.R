@@ -369,6 +369,8 @@ ggheatmap <- function(data,
 
 
   #step5.draw your annotation
+   annotation.rows.label.position <- ifelse(tree_position_cols=="bottom","right","left")
+  annotation.col.label.position <- ifelse(tree_position_rows=="right","left","right")
   if(!is.null(annotation_rows)){
     annotation_rows <- rownames_to_column(annotation_rows,var = "none1")
     for(i in 1:(ncol(annotation_rows)-1)){
@@ -380,7 +382,8 @@ ggheatmap <- function(data,
         theme(axis.title = element_blank(),axis.text.y = element_blank(),
               axis.ticks = element_blank(),panel.background = element_blank(),
               axis.text.x.bottom = element_text(angle = 90,hjust = 0.5,vjust = 0.5))+
-        coord_flip()+labs(fill=names(annotation_rows)[i+1])
+        coord_flip()+labs(fill=names(annotation_rows)[i+1])+
+        scale_y_discrete(position = annotation.rows.label.position)
       if(annotation_position_rows=="left"){
         p <- p%>%insert_left(rowanno,width =annotation_width )
       }else{
@@ -401,7 +404,8 @@ ggheatmap <- function(data,
         scale_y_discrete(position = "right")+
         theme(axis.title = element_blank(),axis.text.x = element_blank(),
               axis.ticks = element_blank(),panel.background = element_blank())+
-       labs(fill=names(annotation_cols)[i+1])
+       labs(fill=names(annotation_cols)[i+1])+
+        scale_y_discrete(position = annotation.col.label.position)
       if(annotation_position_cols=="top"){
         p <- p%>%insert_top(colanno,height =annotation_width)
       }else{
