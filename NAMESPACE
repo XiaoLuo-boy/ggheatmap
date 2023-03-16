@@ -2,6 +2,7 @@
 
 export(ggheatmap)
 export(ggheatmap_plotlist)
+export(ggheatmap_theme)
 import(aplot)
 import(ggtree)
 import(ggplot2)
